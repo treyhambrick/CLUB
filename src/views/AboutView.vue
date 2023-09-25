@@ -16,22 +16,13 @@
     <li>git remote add origin https://github.com/treyhambrick/club.git</li>
     <li>if "remote origin already exists" then "git remote rm origin"</li>
     <li>git push -u origin main</li>
-    <li>gh-pages branch: Note: Remove the dist directory from the project’s .gitignore file</li>
+    <li><U>gh-pages branch</U> Note: Remove the dist directory from the project’s .gitignore file</li>
     <li>git add dist && git commit -m "Initial dist subtree commit"</li>
     <li>git subtree push --prefix dist origin gh-pages</li>
-    <li> "git pull origin main" or "git push -u origin main -f" or "git push -f git@heroku.com:<heroku repo name>.git"
-
-      https://treyhambrick.github.io/club/
-    </li>
-    
-
-  </ul>
+   </ul>
 
   </div>
 </template>
-
-
-git remote add origin https://github.com/treyhambrick/cdc.git
 
 
 
