@@ -13,12 +13,13 @@
     <li>git add .</li>
     <li>git commit -m "first commit123"</li>
     <li>git branch -M main</li>
-    <li>git remote add origin https://github.com/treyhambrick/club.git</li>
     <li>if "remote origin already exists" then "git remote rm origin"</li>
+    <li>git remote add origin https://github.com/treyhambrick/club.git</li>
     <li>git push -u origin main</li>
     <li><U>gh-pages branch</U> Note: Remove the dist directory from the project’s .gitignore file</li>
     <li>git add dist && git commit -m "Initial dist subtree commit"</li>
     <li>git subtree push --prefix dist origin gh-pages</li>
+    <li>wait 5 minutes the goto: https://treyhambrick.github.io/club/    </li>
    </ul>
 
   </div>
