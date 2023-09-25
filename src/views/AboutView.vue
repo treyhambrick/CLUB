@@ -19,10 +19,9 @@
     <li>git add dist && git commit -m "Initial dist subtree commit"</li>
     <li>git subtree push --prefix dist origin gh-pages</li>
     <li>wait 8 minutes the goto: https://treyhambrick.github.io/club/    </li>
+
+    <li>before run try:  git remote set-url origin https://treyhambrick.github.io/club/</li>
    </ul>
-
-
-   git remote set-url origin https://treyhambrick.github.io/club/
 
   </div>
 </template>
