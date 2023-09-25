@@ -21,6 +21,9 @@
     <li>wait 8 minutes the goto: https://treyhambrick.github.io/club/    </li>
    </ul>
 
+
+   git remote set-url origin https://treyhambrick.github.io/club/
+
   </div>
 </template>
 
