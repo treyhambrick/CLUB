@@ -6,7 +6,7 @@
   <li><B>Execution Steps:</B></li> 
   <li>open command prompt</li> 
   <li>cd C:\Users\thambrick\club</li> 
-  <li>npm run build or npm run serve </li>
+  <li>npm run build and then npm run serve </li>
   <li><U> upload to GitHub: run.bat to execute the commands below</U></li>
     <li>git init</li>
     <li>git add .</li>
