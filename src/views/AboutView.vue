@@ -12,8 +12,9 @@
     <li>git add .</li>
     <li>git commit -m "first commit123"</li>
     <li>git branch -M main</li>
+    <li>git remote rm origin</li>
     <li>git remote add origin https://github.com/treyhambrick/club.git</li>
-    <li>if "remote origin already exists" then "git remote rm origin" and run again</li>
+    
     <li>git push -u origin main</li>
     <li><U>Note:</U>  Remove the dist directory from the project’s .gitignore file</li>
     <li>git add dist && git commit -m "Initial dist subtree commit"</li>
