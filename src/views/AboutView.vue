@@ -20,7 +20,7 @@
     <li>git subtree push --prefix dist origin gh-pages</li>
     <li>wait 8 minutes the goto: https://treyhambrick.github.io/club/    </li>
 
-    <li>before run try:  git remote set-url origin https://treyhambrick.github.io/club/</li>
+    <li>maybe before run try:  git remote set-url origin https://treyhambrick.github.io/club/</li>
    </ul>
 
   </div>
