@@ -60,7 +60,7 @@
                         } else { 
                             count.value = 0
                         } 
-                        //alert('This reservation process is Under Construction');
+                        alert('This reservation process is Under Construction');
                         status.value = 'Submit Reservation from email = ' + email.value + ' for dates:' + date.value 
                         //const fs = require('fs');
                         //const data = JSON.stringify(status.value)
