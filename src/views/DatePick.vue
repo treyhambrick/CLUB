@@ -3,24 +3,29 @@
         <div class="picker">
             <P ref="p">
                 <h1>Pick your dates </h1>
-                <form v-on:submit.prevent="onSubmit" class="form">
+                <form   v-on:submit="sendReservation" class="form"   action="https://formspree.io/f/xayglnld" method="POST" target="new">
                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
                 <BR/>
                 Your email:  
-                <input type="text" v-model="email"> 
+                <input type="text" v-model="email" name="name"> 
                 <BR/><BR/>
-                <button @click="sendReservation()"  >
+                <button type="submit"  >
                     Submit Reservation Request
                 </button>  <BR/><BR/>
-             
+                <input type="text" v-model="message" style="visibility: hidden" name="message">
                 {{ status }} 
                 </form>        
             </P>
         </div>
     </div>
-
 </template>
 
+<style>
+    .hide {
+        visibility: hidden !important;
+    }
+
+</style>
 
 <script>
     import { ref,  } from 'vue';
@@ -33,6 +38,7 @@
             catch(e) { alert('Failed to save the file !'); }
         },
         setup() {
+            const message = ref();
             const date = ref();
             let count = ref(0);
             const status = ref();
@@ -43,7 +49,8 @@
             const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
             date.value = [startDate, endDate];   
             
-            const sendReservation = () => {
+            const sendReservation = (e) => {
+                
                 status.value = ''
                 //alert(date.value);
                 //alert(startDate);
@@ -52,36 +59,42 @@
 
                     if (count.value > 2){ 
                         alert('Limit of 3 requests');
+                        e.preventDefault();
                     } else if (date.value == previous_date.value){ 
                         alert('Select a diffrent date range');
+                        e.preventDefault();
                     } else { 
                         if (email.value == previous_email.value){ 
                             count.value++
                         } else { 
                             count.value = 0
                         } 
-                        alert('This reservation process is Under Construction');
-                        status.value = 'Submit Reservation from email = ' + email.value + ' for dates:' + date.value 
+                        //alert('This reservation process is Under Construction');
+                        message.value = 'Reservation from email = ' + email.value + ' for dates:' + date.value 
+                        message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
+                        message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
                         //const fs = require('fs');
                         //const data = JSON.stringify(status.value)
                         //try { fs.writeFileSync('reservations.txt', data, 'utf-8'); }
                         //catch(e) { alert('Failed to save the file !' + e.message); }
 
-                        //if (count.value) {
-                        //count.value++
-                        //status.value = status.value + ' times= ' + count.value  
                         previous_email.value = email.value
                         previous_date.value = date.value
+                        e.submit;
+                        alert('Your reservation has been submitted: ' + message.value);
+                     
                     }    
 
                 } else if (date.value == null){
                     alert('Please enter a date range');
+                    e.preventDefault();
                 } else {
                     alert('Please enter an email');
+                    e.preventDefault();
                 }               
             }
 
-        return {date , email ,startDate , endDate, sendReservation, count, status }
+        return {date , email ,startDate , endDate, sendReservation, count, status, message }
         }
     }
  

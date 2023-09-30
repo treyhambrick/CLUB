@@ -33,6 +33,9 @@
 </script>
 
 <style>
+    .hide {
+        visibility: hidden !important;
+    }
   .picker {
     float: center;
     margin-right: 2%;
