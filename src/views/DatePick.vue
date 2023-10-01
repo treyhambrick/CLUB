@@ -3,8 +3,8 @@
     <div>
         <div class="picker">
             <P ref="p">
-                <h1>Pick your dates </h1>
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnldx" method="POST" target="output_frame">
+                <h1>Pick your dates </h1>                                
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
                     
                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
                 <BR/>
@@ -34,6 +34,7 @@
     import { ref,  } from 'vue';
   
     export default {
+        //target="output_frame"
         //saveFile: function() {
         //    const data = JSON.stringify(this.arr)
         //    const fs = require('fs');
