@@ -1,9 +1,11 @@
+//<form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/myyqbwdo" method="POST" target="output_frame"></form>
 <template>
     <div>
         <div class="picker">
             <P ref="p">
                 <h1>Pick your dates </h1>
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/myyqbwdo" method="POST" target="output_frame">
+                    
                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
                 <BR/>
                 Your email:  
@@ -13,8 +15,9 @@
                     Submit Reservation Request
                 </button>  <BR/><BR/>
                 <input type="text" v-model="message" style="visibility: hidden" name="message">
+                <input type="hidden" name="_to" value="trey.hambrick@gmail.com" />
                 {{ status }} 
-                <iframe name="output_frame" src="" id="output_frame" width="0" height="0" style="visibility: hidden" ></iframe>
+                <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
                 </form>        
             </P>
         </div>
@@ -70,15 +73,18 @@
                             count.value = 0
                         } 
                         //alert('This reservation process is Under Construction');
-                        //startDate.value = "12345678901234567890"
-                        
+                        //alert(date.value) 
+                        message.value = '' + date.value;
+                        //alert(message.value.substr(0,11)) 
+                        //alert(message.value.substr(58,11)) 
                         //let startDateTemp = '';
-                        startDate.value = '' + startDate;
-                        endDate.value = '' + endDate;
+                        //startDate.value = '' + startDate;
+                        //endDate.value = '' + endDate;
                         //alert(startDateTemp)
                         //startDateTemp = startDate.value.substring(0,15);
-                        //alert(startDateTemp)
-                        message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + startDate.value.substring(0,15) + ' to ' + endDate.value.substring(0,15)
+                        
+                        message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + message.value.substr(0,11) + ' to ' + message.value.substr(58,11)
+                        //message.value = 'Submitted Reservation from ' + email.value + ' for dates: ' + date.value
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
                         //const fs = require('fs');
