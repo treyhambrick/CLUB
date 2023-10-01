@@ -6,7 +6,7 @@
                 <h1>Pick your dates </h1>                                
                 <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
                     
-                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
+                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :disabled-dates="disabledDates"/>
                 <BR/>
                 Your email:  
                 <input type="text" v-model="email" name="email"> 
@@ -16,8 +16,21 @@
                 </button>  <BR/><BR/>
                 <input type="text" v-model="message" style="visibility: hidden" name="message">
                 
-                {{ status }} 
+                <CENTER>{{ status }}</CENTER><BR/>
+                <CENTER>Current Schedule</CENTER>
+
+                <CENTER>
+                   <TABLE>
+                    <TR>
+                        <TD>
+                            <VueDatePicker v-model="dateCal"  :markers="markers" :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
+                
+                        </TD>
+                    </TR>
+                   </TABLE> 
+                    </CENTER>
                 <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
+
                 </form>        
             </P>
         </div>
@@ -31,8 +44,63 @@
 </style>
 
 <script>
-    import { ref,  } from 'vue';
-  
+    import { ref, computed  } from 'vue';
+    import addDays from 'date-fns/addDays';
+
+    const disabledDates = computed(() => {
+    const today = new Date();
+
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+    const afterTomorrow = new Date(tomorrow);
+    afterTomorrow.setDate(tomorrow.getDate() + 1);
+
+    return [tomorrow, afterTomorrow]
+    })
+    const markers = ref([
+    {
+        date: addDays(new Date(), 2),
+        type: 'dot',
+        color: 'green',
+    },
+    {
+        date: addDays(new Date(), 3),
+        type: 'dot',
+        color: 'green',
+    },
+    {
+        date: addDays(new Date(), 1),
+        type: 'line',
+        color: 'green',
+        tooltip: [{ text: 'Avaliable Start here', color: 'green' }],
+    },
+    {
+        date: addDays(new Date(), 78),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), 97),
+        type: 'line',
+        color: 'green',
+        tooltip: [{ text: 'Avaliable Start here', color: 'green' }],
+    },
+    {
+        date: addDays(new Date(), 140),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), 179),
+        type: 'line',
+        color: 'green',
+        tooltip: [{ text: 'Avaliable Start here', color: 'green' }],
+    },
+
+    ])
     export default {
         //target="output_frame"
         //saveFile: function() {
@@ -44,6 +112,8 @@
         setup() {
             const message = ref();
             const date = ref();
+            
+            const dateCal = ref(new Date());
             let count = ref(0);
             const status = ref();
             const email = ref();
@@ -53,7 +123,7 @@
             const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
             date.value = [startDate, endDate];  
             //count.value = 0; 
-            
+
             const sendReservation = (e) => {
                 
                 status.value = ''
@@ -87,10 +157,7 @@
                         //alert(message.value.substr(58,11)) 
                         //let startDateTemp = '';
                         //startDate.value = '' + startDate;
-                        //endDate.value = '' + endDate;
-                        //alert(startDateTemp)
-                        //startDateTemp = startDate.value.substring(0,15);
-                        
+
                         message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + message.value.substr(0,11) + ' to ' + message.value.substr(58,11)
                         //message.value = 'Submitted Reservation from ' + email.value + ' for dates: ' + date.value
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
@@ -102,7 +169,7 @@
 
                         previous_email.value = email.value
                         previous_date.value = date.value
-                        e.submit;
+                        //e.submit;
                         //alert(message.value);
                         status.value = message.value
                     }    
@@ -116,7 +183,7 @@
                 }               
             }
 
-        return {date , email ,startDate , endDate, sendReservation, count, status, message }
+        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers}
         }
     }
  
