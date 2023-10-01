@@ -1,10 +1,10 @@
-//<form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/myyqbwdo" method="POST" target="output_frame"></form>
+
 <template>
     <div>
         <div class="picker">
             <P ref="p">
                 <h1>Pick your dates </h1>
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/myyqbwdo" method="POST" target="output_frame">
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xvojvavp" method="POST" target="output_frame">
                     
                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
                 <BR/>
@@ -15,7 +15,7 @@
                     Submit Reservation Request
                 </button>  <BR/><BR/>
                 <input type="text" v-model="message" style="visibility: hidden" name="message">
-                <input type="hidden" name="_to" value="trey.hambrick@gmail.com" />
+                
                 {{ status }} 
                 <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
                 </form>        
