@@ -4,7 +4,7 @@
         <div class="picker">
             <P ref="p">
                 <h1>Pick your dates </h1>
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xvojvavp" method="POST" target="output_frame">
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnldx" method="POST" target="output_frame">
                     
                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy"/>
                 <BR/>
@@ -34,12 +34,12 @@
     import { ref,  } from 'vue';
   
     export default {
-        saveFile: function() {
-            const data = JSON.stringify(this.arr)
-            const fs = require('fs');
-            try { fs.writeFileSync('myfile.txt', data, 'utf-8'); }
-            catch(e) { alert('Failed to save the file !'); }
-        },
+        //saveFile: function() {
+        //    const data = JSON.stringify(this.arr)
+        //    const fs = require('fs');
+        //    try { fs.writeFileSync('myfile.txt', data, 'utf-8'); }
+        //    catch(e) { alert('Failed to save the file !'); }
+        //},
         setup() {
             const message = ref();
             const date = ref();
@@ -50,18 +50,25 @@
             const previous_date = ref();
             const startDate = new Date();
             const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
-            date.value = [startDate, endDate];   
+            date.value = [startDate, endDate];  
+            //count.value = 0; 
             
             const sendReservation = (e) => {
                 
                 status.value = ''
-                //alert(date.value);
-                //alert(startDate);
-                //alert(endDate);
+                if (email.value == previous_email.value){ 
+                    count.value++
+                } else { 
+                    count.value = 0
+                } 
+                //alert(count.value);
+                //alert(email.value);
+                //alert(previous_email.value);
+
                 if ((email.value) && (date.value != null)){
 
                     if (count.value > 2){ 
-                        alert('Limit of 3 requests');
+                        alert('Limit of 2 requests');
                         e.preventDefault();
                     } else if (date.value == previous_date.value){ 
                         alert('Select a diffrent date range');
