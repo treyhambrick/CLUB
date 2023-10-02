@@ -5,31 +5,39 @@
             <P ref="p">
                 <h1>Pick your dates </h1>                                
                 <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
+                    <CENTER>
+                    <TABLE>
+                        <TR>
+                            <TD>
+                                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :disabled-dates="disabledDates"/>
                     
-                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :disabled-dates="disabledDates"/>
-                <BR/>
-                Your email:  
-                <input type="text" v-model="email" name="email"> 
-                <BR/><BR/>
-                <button type="submit"  >
-                    Submit Reservation Request
-                </button>  <BR/><BR/>
-                <input type="text" v-model="message" style="visibility: hidden" name="message">
-                
-                <CENTER>{{ status }}</CENTER><BR/>
-                <CENTER>Current Schedule</CENTER>
-
-                <CENTER>
-                   <TABLE>
-                    <TR>
-                        <TD>
-                            <VueDatePicker v-model="dateCal"  :markers="markers" :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
-                
-                        </TD>
-                    </TR>
-                   </TABLE> 
+                            </TD>
+                        </TR>
+                    </TABLE> 
                     </CENTER>
-                <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
+                    <BR/>
+                    Your email:  
+                    <input type="text" v-model="email" name="email"> 
+                    <BR/><BR/>
+                    <button type="submit"  >
+                        Submit Reservation Request 
+                    </button>  <BR/>
+                    <input type="text" v-model="message" style="visibility: hidden" name="message">
+                    
+                    <CENTER>{{ status }}</CENTER><BR/>
+                    <CENTER>Current Schedule</CENTER>
+
+                    <CENTER>
+                    <TABLE>
+                        <TR>
+                            <TD>
+                                <VueDatePicker v-model="dateCal"  :markers="markers" :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
+                    
+                            </TD>
+                        </TR>
+                    </TABLE> 
+                        </CENTER>
+                    <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
 
                 </form>        
             </P>
@@ -51,24 +59,15 @@
     const today = new Date();
 
     const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setDate(tomorrow.getDate() -1)
 
-    const afterTomorrow = new Date(tomorrow);
-    afterTomorrow.setDate(tomorrow.getDate() + 1);
+    //const afterTomorrow = new Date(tomorrow);
+    //afterTomorrow.setDate(tomorrow.getDate() + 1);  , afterTomorrow
 
-    return [tomorrow, afterTomorrow]
+    return [tomorrow]
     })
+    
     const markers = ref([
-    {
-        date: addDays(new Date(), 2),
-        type: 'dot',
-        color: 'green',
-    },
-    {
-        date: addDays(new Date(), 3),
-        type: 'dot',
-        color: 'green',
-    },
     {
         date: addDays(new Date(), 1),
         type: 'line',
