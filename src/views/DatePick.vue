@@ -31,7 +31,7 @@
                     <TABLE>
                         <TR>
                             <TD>
-                                <VueDatePicker v-model="dateCal"  :markers="markers" :enable-time-picker="false"  :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
+                                <VueDatePicker v-model="dateCal"  :markers="markers" :enable-time-picker="false"  :inline="{ input: true }" text-input auto-apply  position="center"  dark  />
                     
                             </TD>
                         </TR>
