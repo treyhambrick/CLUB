@@ -1,9 +1,33 @@
 <template>
   <div class="about">
-    <h1>This is site built with vue for Club Del Cielo</h1>
+
+    <h1> Club Del Cielo</h1>
+
+    <center>
+    <TABLE>
+      <TR>
+          <TD>
+            <ul>
+              <li>Free Wi Fi</li> 
+              <li>Swimming pool</li> 
+              <li>Parking</li>
+              <li>24/7 Security</li> 
+              <li>Fully furnished & equipped</li> 
+              <li>Location: 250 meters south of the Municipality <BR/>building Playa Jaco, Costa Rica</li>
+            </ul>         
+          </TD>
+      </TR>
+    </TABLE> 
+    </center>
+
+
+    
+    <iframe name="output_frame" src="https://www.clubdelcielo.com/index.html" id="output_frame" width="90%" height="800" style="visibility: !hidden" ></iframe>
+
 
   <ul>
-  <li><B>Execution Steps:</B></li> 
+  <li><B>This is site built with vue.js</B></li> 
+  <li> Execution notes:</li> 
   <li>open command prompt</li> 
   <li>cd C:\Users\thambrick\club</li> 
   <li>npm run build and then npm run serve </li>

@@ -9,7 +9,7 @@
                     <TABLE>
                         <TR>
                             <TD>
-                                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :disabled-dates="disabledDates"/>
+                                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :enable-time-picker="false"  :disabled-dates="disabledDates"/>
                     
                             </TD>
                         </TR>
@@ -31,7 +31,7 @@
                     <TABLE>
                         <TR>
                             <TD>
-                                <VueDatePicker v-model="dateCal"  :markers="markers" :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
+                                <VueDatePicker v-model="dateCal"  :markers="markers" :enable-time-picker="false"  :inline="{ input: true }" text-input auto-apply :disabled-dates="disabledDates"  position="center"  dark  />
                     
                             </TD>
                         </TR>
@@ -59,7 +59,7 @@
     const today = new Date();
 
     const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() -1)
+    tomorrow.setDate(tomorrow.getDate() )
 
     //const afterTomorrow = new Date(tomorrow);
     //afterTomorrow.setDate(tomorrow.getDate() + 1);  , afterTomorrow
