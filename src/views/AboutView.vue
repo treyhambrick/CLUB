@@ -31,7 +31,7 @@
   <li>open command prompt</li> 
   <li>cd C:\Users\thambrick\club</li> 
   <li>npm run build and then npm run serve </li>
-  <li><U> upload to GitHub: run.bat to execute the commands below</U></li>
+  <li><U> upload to GitHub: sh run.sh to execute the commands below</U></li>
     <li>git init</li>
     <li>git add .</li>
     <li>git commit -m "first commit123"</li>
