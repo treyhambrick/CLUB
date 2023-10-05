@@ -257,7 +257,7 @@
                 }               
             }
 
-        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers,r1}
+        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers}
         }
     }
  
