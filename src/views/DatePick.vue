@@ -24,7 +24,7 @@
                     </button>  <BR/>
                     <input type="text" v-model="message" style="visibility: hidden" name="message">
                     
-                    <CENTER>{{ status }}</CENTER><BR/>
+                    <CENTER>{{ status }} </CENTER><BR/>
                     <CENTER>Current Schedule</CENTER>
 
                     <CENTER>
@@ -59,14 +59,14 @@
     const today = new Date();
 
     const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() )
+    tomorrow.setDate(tomorrow.getDate() - 2)
 
     //const afterTomorrow = new Date(tomorrow);
     //afterTomorrow.setDate(tomorrow.getDate() + 1);  , afterTomorrow
 
     return [tomorrow]
     })
-    
+
     const markers = ref([
     {
         date: addDays(new Date(), 1),
@@ -75,10 +75,76 @@
         tooltip: [{ text: 'Avaliable Start here', color: 'green' }],
     },
     {
-        date: addDays(new Date(), 78),
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-08", "YYYY-MM-DD"))).asDays() *-1),
         type: 'line',
         color: 'red',
         tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-09", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-10", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-11", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-12", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-13", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-14", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-15", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-16", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-17", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-18", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'Not Avaliable Start here', color: 'red' }],
+    },
+    {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-20", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'I arrive till March 26', color: 'red' }],
     },
     {
         date: addDays(new Date(), 97),
@@ -100,6 +166,9 @@
     },
 
     ])
+
+    import moment from 'moment';
+
     export default {
         //target="output_frame"
         //saveFile: function() {
@@ -122,6 +191,12 @@
             const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
             date.value = [startDate, endDate];  
             //count.value = 0; 
+            //var start = moment(new Date(), "YYYY-MM-DD");
+            //var end = moment("2023-12-08", "YYYY-MM-DD");
+
+            //Difference in number of days
+            //const r1 = moment.duration(start.diff(end)).asDays() *-1;
+            //const r1 = moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-08", "YYYY-MM-DD"))).asDays() *-1;
 
             const sendReservation = (e) => {
                 
@@ -182,7 +257,7 @@
                 }               
             }
 
-        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers}
+        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers,r1}
         }
     }
  

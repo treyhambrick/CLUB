@@ -15,6 +15,7 @@
     "core-js": "^3.8.3",
     "firebase": "^10.4.0",
     "json-server": "^0.17.3",
+    "moment": "^2.29.4",
     "primevue": "^3.35.0",
     "resource-bundle": "^0.1.2",
     "v-calendar": "^3.0.3",
