@@ -1,5 +1,5 @@
 #!/bin/bash
-# npm run build;
+npm run build;
 env -i git init;
 env -i git init;
 env -i git add .;
