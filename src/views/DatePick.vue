@@ -190,7 +190,7 @@
             },
             updateScreenWidth() {
                 this.screenWidth = window.innerWidth;
-                if (window.innerWidth <600) 
+                if (window.innerWidth <500) 
                     this.screenType = "MOBLE";
                 else
                     this.screenType = "LAPTOP";
