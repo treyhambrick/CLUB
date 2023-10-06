@@ -1,12 +1,7 @@
 <template> 
   <Gallery />
   
-  <div v-if="!isMobile()">
-      mobile device
-  </div>
-  <div v-else>
-      not mobile device
-  </div>
+  <p>{{screenType}} Screen width: {{ screenWidth }}px</p>
 
 </template>
 
@@ -16,24 +11,66 @@
 import Gallery from '@/components/Gallery.vue';
 
 export default {
+  
   name: 'home',
   components: {
     Gallery,
   },
-  methods: {   
-    isMobilex() {     
-      if (screen.width <= 760) 
-         {return true} 
-      else 
-         {return false}   
-      }, 
-    }, 
-    created(){ 
-      this.isMobilex() 
-    },
-    setup(){
-      const isMobile = () => screen.width <= 760
-      return {isMobile}
-    }
+  data() {
+        return {
+            screenWidth: 0,
+            screenType:''
+            };
+            },
+            mounted() {
+                this.updateScreenWidth();
+                this.onScreenResize();
+            },
+            methods: {
+            onScreenResize() {
+                window.addEventListener("resize", () => {
+                this.updateScreenWidth();
+                });
+            },
+            updateScreenWidth() {
+                this.screenWidth = window.innerWidth;
+                if (window.innerWidth <600) 
+                    this.screenType = "MOBLE";
+                else
+                    this.screenType = "LAPTOP";
+            },
+        },
+
 };
 </script>
+
+
+<!----
+
+        data() {
+        return {
+            screenWidth: 0,
+            screenType:''
+            };
+            },
+            mounted() {
+                this.updateScreenWidth();
+                this.onScreenResize();
+            },
+            methods: {
+            onScreenResize() {
+                window.addEventListener("resize", () => {
+                this.updateScreenWidth();
+                });
+            },
+            updateScreenWidth() {
+                this.screenWidth = window.innerWidth;
+                if (window.innerWidth <600) 
+                    this.screenType = "MOBLE";
+                else
+                    this.screenType = "LAPTOP";
+            },
+        },
+
+
+-->

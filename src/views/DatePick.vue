@@ -4,7 +4,7 @@
         <div class="picker">
             <P ref="p">
                 <h1>Pick your dates </h1>                                
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
+                <form v-on:submit.prevent="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
                     <CENTER>
                     <TABLE>
                         <TR>
@@ -35,10 +35,11 @@
                     
                             </TD>
                         </TR>
-                    </TABLE> 
-                        </CENTER>
+                    </TABLE> <BR/>
+                    <p>{{screenType}} Screen width: {{ screenWidth }}px</p>
+                    </CENTER>
                     <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
-
+                    
                 </form>        
             </P>
         </div>
@@ -170,13 +171,31 @@
     import moment from 'moment';
 
     export default {
-        //target="output_frame"
-        //saveFile: function() {
-        //    const data = JSON.stringify(this.arr)
-        //    const fs = require('fs');
-        //    try { fs.writeFileSync('myfile.txt', data, 'utf-8'); }
-        //    catch(e) { alert('Failed to save the file !'); }
-        //},
+        
+        data() {
+        return {
+            screenWidth: 0,
+            screenType:''
+            };
+            },
+            mounted() {
+                this.updateScreenWidth();
+                this.onScreenResize();
+            },
+            methods: {
+            onScreenResize() {
+                window.addEventListener("resize", () => {
+                this.updateScreenWidth();
+                });
+            },
+            updateScreenWidth() {
+                this.screenWidth = window.innerWidth;
+                if (window.innerWidth <600) 
+                    this.screenType = "MOBLE";
+                else
+                    this.screenType = "LAPTOP";
+            },
+        },
         setup() {
             const message = ref();
             const date = ref();
@@ -190,13 +209,6 @@
             const startDate = new Date();
             const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
             date.value = [startDate, endDate];  
-            //count.value = 0; 
-            //var start = moment(new Date(), "YYYY-MM-DD");
-            //var end = moment("2023-12-08", "YYYY-MM-DD");
-
-            //Difference in number of days
-            //const r1 = moment.duration(start.diff(end)).asDays() *-1;
-            //const r1 = moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2023-12-08", "YYYY-MM-DD"))).asDays() *-1;
 
             const sendReservation = (e) => {
                 
@@ -206,12 +218,7 @@
                 } else { 
                     count.value = 0
                 } 
-                //alert(count.value);
-                //alert(email.value);
-                //alert(previous_email.value);
-
                 if ((email.value) && (date.value != null)){
-
                     if (count.value > 2){ 
                         alert('Limit of 2 requests');
                         e.preventDefault();
@@ -227,23 +234,14 @@
                         //alert('This reservation process is Under Construction');
                         //alert(date.value) 
                         message.value = '' + date.value;
-                        //alert(message.value.substr(0,11)) 
-                        //alert(message.value.substr(58,11)) 
-                        //let startDateTemp = '';
-                        //startDate.value = '' + startDate;
-
                         message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + message.value.substr(0,11) + ' to ' + message.value.substr(58,11)
                         //message.value = 'Submitted Reservation from ' + email.value + ' for dates: ' + date.value
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
-                        //const fs = require('fs');
-                        //const data = JSON.stringify(status.value)
-                        //try { fs.writeFileSync('reservations.txt', data, 'utf-8'); }
-                        //catch(e) { alert('Failed to save the file !' + e.message); }
 
                         previous_email.value = email.value
                         previous_date.value = date.value
-                        //e.submit;
+                        e.submit;
                         //alert(message.value);
                         status.value = message.value
                     }    
@@ -257,12 +255,57 @@
                 }               
             }
 
-        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates,markers}
+        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates, markers}
         }
     }
  
     
 </script>
+
+
+<!--- 
+<style>
+#app {
+  text-align: center;
+  margin-top: 60px;
+}
+</style>
+
+
+ 
+<template>
+    <div id="app">
+      <p>Screen width: {{ screenWidth }}px</p>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+    name: "App",
+    data() {
+      return {
+        screenWidth: 0,
+      };
+    },
+    mounted() {
+      this.updateScreenWidth();
+      this.onScreenResize();
+    },
+    methods: {
+      onScreenResize() {
+        window.addEventListener("resize", () => {
+          this.updateScreenWidth();
+        });
+      },
+      updateScreenWidth() {
+        this.screenWidth = window.innerWidth;
+      },
+    },
+  };
+  </script>
+  --->
+
+
 
 
 //        email: "email",

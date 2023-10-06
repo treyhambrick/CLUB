@@ -47,9 +47,41 @@
 
     <!---li>maybe before run try:  git remote set-url origin https://treyhambrick.github.io/club/</li--->
    </ul>
-
+   <p>{{screenType}} Screen width: {{ screenWidth }}px</p>
   </div>
 </template>
 
+<script>
+
+
+export default {
+  
+  data() {
+        return {
+            screenWidth: 0,
+            screenType:''
+            };
+            },
+            mounted() {
+                this.updateScreenWidth();
+                this.onScreenResize();
+            },
+            methods: {
+            onScreenResize() {
+                window.addEventListener("resize", () => {
+                this.updateScreenWidth();
+                });
+            },
+            updateScreenWidth() {
+                this.screenWidth = window.innerWidth;
+                if (window.innerWidth <600) 
+                    this.screenType = "MOBLE";
+                else
+                    this.screenType = "LAPTOP";
+            },
+        },
+
+};
+</script>
 
 
