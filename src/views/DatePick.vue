@@ -1,12 +1,12 @@
 
 <template>
     <div>
-        <div class="picker">
+        <div>
             <P ref="p">
                 <h1>Pick your dates </h1>                                
                 <form v-on:submit.prevent="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
                     <CENTER>
-                    <TABLE>
+                    <TABLE class="picker" :class="(screenType == 'LAPTOP') ? 'picker' : 'pickerMoble'">
                         <TR>
                             <TD>
                                 <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :enable-time-picker="false"  :disabled-dates="disabledDates"/>
@@ -190,7 +190,7 @@
             },
             updateScreenWidth() {
                 this.screenWidth = window.innerWidth;
-                if (window.innerWidth <500) 
+                if (window.innerWidth <700) 
                     this.screenType = "MOBLE";
                 else
                     this.screenType = "LAPTOP";
@@ -262,6 +262,29 @@
     
 </script>
 
+
+<style>
+    .hide {
+        visibility: hidden !important;
+    }
+  .picker {
+    float: center;
+    margin-right: 2%;
+    margin-left: 2%;
+    position: relative;
+    text-align: center;
+    width: 600px;
+  }
+  .pickerMoble {
+    float: center;
+    margin-right: 2%;
+    margin-left: 2%;
+    position: relative;
+    text-align: center;
+    width: 280px;
+  }
+
+</style>
 
 <!--- 
 <style>
