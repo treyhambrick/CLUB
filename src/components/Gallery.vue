@@ -11,7 +11,7 @@
     </p>
 </div></center>
       <div class="gallery">
-        <div class="gallery-panel"
+        <div  :class="(screenType == 'LAPTOP') ? 'gallery-panel' : 'gallery-panelMoble'"
             v-for="photo in photos"
             :key="photo.id">
           <router-link :to="`/photo/${photo.id}`">
@@ -28,21 +28,42 @@
 import photos from '@/photos.json';
 
 export default {
+  
   name: 'Gallery',
   data() {
-    return {
-      photos,
-      description: 'Club Del Cielo Unit 14 is within a 5-minute walk of Jaco Beach. Guests can take a dip in the outdoor pool or enjoy the many local activities. There is a children\'s pool and in-room conveniences like AC, washers/dryers and refrigerators. Fellow travelers say good things about the pool.',
-      title: 'Club Del Cielo Unit 14',
-    };
-  },
-  methods: {
+      return {
+        screenWidth: 0,
+        screenType:'',
+        photos,
+        description: 'Club Del Cielo Unit 14 is within a 5-minute walk of Jaco Beach. Guests can take a dip in the outdoor pool or enjoy the many local activities. There is a children\'s pool and in-room conveniences like AC, washers/dryers and refrigerators. Fellow travelers say good things about the pool.',
+        title: 'Club Del Cielo Unit 14',
+      };
+    },
+    mounted() {
+        this.updateScreenWidth();
+        this.onScreenResize();
+    },
+    methods: {
+    onScreenResize() {
+          window.addEventListener("resize", () => {
+          this.updateScreenWidth();
+          });
+      },
+      updateScreenWidth() {
+          this.screenWidth = window.innerWidth;
+          if (window.innerWidth <700) 
+              this.screenType = "MOBLE";
+          else
+              this.screenType = "LAPTOP";
+      },
     thumbUrl(filename) {
-      return require(`../assets/images/thumbnails/${filename}`);
+       return require(`../assets/images/thumbnails/${filename}`);
     },
   },
 };
 </script>
+
+
 
 <style>
   .gallery {
@@ -55,8 +76,15 @@ export default {
   }
 
   .gallery-panel img {
-    width: 83%;
-    height: 49vw;
+    width: 100%;
+    height: 65vw;
+    object-fit: cover;
+    border-radius: 0.75rem;
+  }
+
+  .gallery-panelMoble img {
+    width: 88%;
+    height: 58vw;
     object-fit: cover;
     border-radius: 0.75rem;
   }

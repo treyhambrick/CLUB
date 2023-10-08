@@ -74,7 +74,7 @@ export default {
             },
             updateScreenWidth() {
                 this.screenWidth = window.innerWidth;
-                if (window.innerWidth <500) 
+                if (window.innerWidth <700) 
                     this.screenType = "MOBLE";
                 else
                     this.screenType = "LAPTOP";
