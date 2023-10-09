@@ -4,12 +4,12 @@
         <div>
             <P ref="p">
                 <h1>Pick your dates </h1>                                
-                <form v-on:submit.prevent="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
                     <CENTER>
                     <TABLE class="picker" :class="(screenType == 'LAPTOP') ? 'picker' : 'pickerMoble'">
                         <TR>
                             <TD>
-                                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :enable-time-picker="false"  :disabled-dates="disabledDates"/>
+                                <VueDatePicker v-model="date"  range format="MM/dd/yyyy" value-format="MM-dd-yyyy" :enable-time-picker="false"  :disabled-dates="disabledDates"  :markers="markers"/>
                     
                             </TD>
                         </TR>
@@ -38,7 +38,7 @@
                     </TABLE> <BR/>
                     <p>{{screenType}} Screen width: {{ screenWidth }}px</p>
                     </CENTER>
-                    <iframe name="output_frame" src="" id="output_frame" width="800" height="200" style="visibility: hidden" ></iframe>
+                    <iframe name="output_frame" src="" id="output_frame" width="800" height="800" style="visibility: hidden" ></iframe>
                     
                 </form>        
             </P>
@@ -65,7 +65,7 @@
         //const afterTomorrow = new Date(tomorrow);
         //afterTomorrow.setDate(tomorrow.getDate() + 1);  , afterTomorrow
 
-        return [tomorrow]
+        return []
     })
 
     const markers = ref([
@@ -241,9 +241,10 @@
 
                         previous_email.value = email.value
                         previous_date.value = date.value
-                        e.submit;
+                        
                         //alert(message.value);
                         status.value = message.value
+                        e.submit;
                     }    
 
                 } else if (date.value == null){
