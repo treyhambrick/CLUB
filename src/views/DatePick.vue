@@ -4,7 +4,7 @@
         <div>
             <P ref="p">
                 <h1>Pick your dates </h1>                                
-                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame">
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame" name="form">
                     <CENTER>
                     <TABLE class="picker" :class="(screenType == 'LAPTOP') ? 'picker' : 'pickerMoble'">
                         <TR>
@@ -32,13 +32,14 @@
                         <TR>
                             <TD>
                                 <VueDatePicker v-model="dateCal"  :markers="markers" :enable-time-picker="false"  :inline="{ input: true }" text-input auto-apply  position="center"  dark  />
-                    
                             </TD>
                         </TR>
                     </TABLE> <BR/>
-                    <p>{{screenType}} Screen width: {{ screenWidth }}px</p>
+
+                    <p>{{screenType}} Screen width: {{ screenWidth }}px  ip:{{ ipadd }} </p>
                     </CENTER>
                     <iframe name="output_frame" src="" id="output_frame" width="800" height="800" style="visibility: hidden" ></iframe>
+                    <!---input type="text" v-model="ipadd" name="ipaddress" style="visibility: hidden"---> 
                     
                 </form>        
             </P>
@@ -169,18 +170,24 @@
     ])
 
     import moment from 'moment';
-
+    
     export default {
         
         data() {
         return {
             screenWidth: 0,
-            screenType:''
+            screenType:'',
+            //ipadd:'',
             };
             },
             mounted() {
                 this.updateScreenWidth();
                 this.onScreenResize();
+                fetch('https://api.ipify.org?format=json')
+                    .then(x => x.json())
+                    .then(({ ip }) => {
+                        this.ipadd = ip;
+                    });
             },
             methods: {
             onScreenResize() {
@@ -195,15 +202,19 @@
                 else
                     this.screenType = "LAPTOP";
             },
+
         },
         setup() {
+            
             const message = ref();
             const date = ref();
-            
             const dateCal = ref(new Date());
             let count = ref(0);
             const status = ref();
             const email = ref();
+            
+            //const ipaddress = ref();
+            const ipadd = ref({})
             const previous_email = ref();
             const previous_date = ref();
             const startDate = new Date();
@@ -211,7 +222,7 @@
             date.value = [startDate, endDate];  
 
             const sendReservation = (e) => {
-                
+ 
                 status.value = ''
                 if (email.value == previous_email.value){ 
                     count.value++
@@ -232,10 +243,10 @@
                             count.value = 0
                         } 
                         //alert('This reservation process is Under Construction');
-                        //alert(date.value) 
+                        //alert(ipadd.value) //+ ' from ' + ipadd.value
                         message.value = '' + date.value;
-                        message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + message.value.substr(0,11) + ' to ' + message.value.substr(58,11)
-                        //message.value = 'Submitted Reservation from ' + email.value + ' for dates: ' + date.value
+                        message.value = 'Submitted Reservation from email = ' + email.value + ' for dates: ' + message.value.substr(0,11) + ' to ' + message.value.substr(58,11) + ' from ' + ipadd.value 
+
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
                         message.value =  message.value.replace("GMT-0400 (Eastern Daylight Time)", "");
 
@@ -244,7 +255,7 @@
                         
                         //alert(message.value);
                         status.value = message.value
-                        e.submit;
+                        //e.submit;
                     }    
 
                 } else if (date.value == null){
@@ -256,7 +267,7 @@
                 }               
             }
 
-        return {date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates, markers}
+        return { ipadd, date , dateCal , email ,startDate , endDate, sendReservation, count, status, message, disabledDates, markers}
         }
     }
  
