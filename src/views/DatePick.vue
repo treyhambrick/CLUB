@@ -3,7 +3,7 @@
     <div>
         <div>
             <P ref="p">
-                <h1>Pick your dates </h1>                                
+                <h1>Pick your dates </h1>            
                 <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame" name="form">
                     <CENTER>
                     <TABLE class="picker" :class="(screenType == 'LAPTOP') ? 'picker' : 'pickerMoble'">
@@ -40,7 +40,12 @@
                     </CENTER>
                     <iframe name="output_frame" src="" id="output_frame" width="800" height="800" style="visibility: hidden" ></iframe>
                     <!---input type="text" v-model="ipadd" name="ipaddress" style="visibility: hidden"---> 
-                    
+                </form>   
+    
+                <form v-on:submit="sendReservation" class="form" action="https://formspree.io/f/xayglnld" method="POST" target="output_frame2" name="form2" style="visibility: hidden"> 
+                    <input type="text" v-model="email2" name="email"> 
+                    <input type="text" v-model="message" style="visibility: hidden" name="message">
+                    <iframe name="output_frame2" src="" id="output_frame2" width="800" height="800" style="visibility: hidden" ></iframe>
                 </form>        
             </P>
         </div>
@@ -155,6 +160,12 @@
         tooltip: [{ text: 'Avaliable Start here', color: 'green' }],
     },
     {
+        date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2024-02-01", "YYYY-MM-DD"))).asDays() *-1),
+        type: 'line',
+        color: 'red',
+        tooltip: [{ text: 'AP arrives Feb 1', color: 'red' }],
+    },
+    {
         date: addDays(new Date(), moment.duration(moment(new Date(), "YYYY-MM-DD").diff(moment("2024-02-19", "YYYY-MM-DD"))).asDays() *-1),
         type: 'line',
         color: 'red',
@@ -187,12 +198,16 @@
                     .then(x => x.json())
                     .then(({ ip }) => {
                         this.ipadd = ip;
+                        this.email2 = ip;
+                        //alert('mounted');
+
                     });
             },
             methods: {
             onScreenResize() {
                 window.addEventListener("resize", () => {
                 this.updateScreenWidth();
+                //alert('onScreenResize');
                 });
             },
             updateScreenWidth() {
@@ -205,7 +220,7 @@
 
         },
         setup() {
-            
+            //alert('setup');
             const message = ref();
             const date = ref();
             const dateCal = ref(new Date());
@@ -214,7 +229,8 @@
             const email = ref();
             
             //const ipaddress = ref();
-            const ipadd = ref({})
+            const ipadd = ref({});
+            //const ipadd2 = ref({});
             const previous_email = ref();
             const previous_date = ref();
             const startDate = new Date();
@@ -273,6 +289,7 @@
  
     
 </script>
+
 
 
 <style>
